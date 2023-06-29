@@ -1,35 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react'
+import GridExample from '../components/Card'
 import './App.css'
+import {
+  MDBRow
+} from 'mdb-react-ui-kit';
+
+// API Endpoint
+const cohortName = "2302-ACC-PT-WEB-PT-A";
+
+// Use the APIURL variable for fetch requests
+const APIURL = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/`;
+const PLAYERS_APIURL = `${APIURL}/players`;
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [puppies, setPuppies] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch(PLAYERS_APIURL)
+      const json = await res.json()
+      setPuppies(json.data['players'])
+    }
+    fetchData()
+  }, [])
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <MDBRow className='row-cols-1 row-cols-md-4 g-4'>
+      {puppies.map((puppy) => <GridExample key={puppy.id} puppy={puppy} />)}
+    </MDBRow>
+  );
 }
 
 export default App

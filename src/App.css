@@ -1,8 +1,15 @@
 #root {
+  font-family: Roboto, Helvetica, Arial, sans-serif
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background-color: #e5dfdf;
+}
+
+.photo {
+  height: 400px;
+  width: 200px; 
 }
 
 .logo {
