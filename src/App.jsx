@@ -25,9 +25,12 @@ function App() {
   }, [])
 
   return (
+    <>
+    <h1>Puppy Pals</h1>
     <MDBRow className='row-cols-1 row-cols-md-4 g-4'>
       {puppies.map((puppy) => <GridExample key={puppy.id} puppy={puppy} />)}
     </MDBRow>
+    </>
   );
 }
 
